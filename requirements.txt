@@ -1,4 +1,11 @@
 crawl4ai
+trafilatura
+chromadb
+sentence-transformers
+langchain
+langchain-text-splitters
+python-dotenv
+groq
 beautifulsoup4
 requests
-python-dotenv
+torch

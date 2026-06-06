@@ -1,9 +1,9 @@
 import json
 
 from rag.chunker import chunk_documents
-from rag.embeddings import generate_embeddings
 from rag.vectordb import store_chunks
 
+DB_PATH = "indexes/test_db"
 
 with open(
     "data/scraped_content.json",
@@ -13,15 +13,20 @@ with open(
 
     docs = json.load(f)
 
-chunks = chunk_documents(docs)
+chunks = chunk_documents(
+    docs
+)
 
-print("Chunks:", len(chunks))
-
-embeddings = generate_embeddings(
-    chunks
+print(
+    "Chunks:",
+    len(chunks)
 )
 
 store_chunks(
     chunks,
-    embeddings
+    DB_PATH
+)
+
+print(
+    "Vector database created successfully."
 )

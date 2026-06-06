@@ -1,5 +1,14 @@
 from rag.retriever import retrieve_context
 from rag.generator import generate_answer
+from index_website import index_website
+
+url = input(
+    "Enter Website URL: "
+)
+
+db_path = index_website(
+    url
+)
 
 
 while True:
@@ -9,7 +18,8 @@ while True:
     )
 
     results = retrieve_context(
-        question
+        question,
+        db_path
     )
     print("\n===== RETRIEVED DOCS =====\n")
 

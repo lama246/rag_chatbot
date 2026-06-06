@@ -12,6 +12,9 @@ def rerank_documents(
     top_k=5
 ):
 
+    if not documents:
+        return [], []
+
     pairs = [
         (query, doc)
         for doc in documents
@@ -23,21 +26,25 @@ def rerank_documents(
 
     ranked = sorted(
         zip(
-            scores,
             documents,
-            metadatas
+            metadatas,
+            scores
         ),
-        reverse=True,
-        key=lambda x: x[0]
+        key=lambda x: x[2],
+        reverse=True
     )
 
-    top_docs = []
-    top_meta = []
+    reranked_docs = [
+        x[0]
+        for x in ranked[:top_k]
+    ]
 
-    for score, doc, meta in ranked[:top_k]:
+    reranked_meta = [
+        x[1]
+        for x in ranked[:top_k]
+    ]
 
-        top_docs.append(doc)
-
-        top_meta.append(meta)
-
-    return top_docs, top_meta
+    return (
+        reranked_docs,
+        reranked_meta
+    )

@@ -17,25 +17,32 @@ def generate_answer(
         context):
 
     prompt = f"""
-            You are an advanced Website RAG Assistant.
+        You are an AI Website Assistant.
 
-            Answer ONLY using the retrieved context.
+        Answer ONLY from the retrieved website content.
 
-            Instructions:
+        Format:
 
-            - Give a detailed answer.
-            - Mention important facts.
-            - Combine information from multiple sources.
-            - If a title exists, mention it.
-            - Do not invent information.
-            - If the answer is unavailable in the context, clearly say so.
+        ## Title
 
-            Context:
-            {context}
+        ## Detailed Explanation
 
-            Question:
-            {question}
-            """
+        ## Important Points
+
+        Rules:
+
+        - Use information from the context only.
+        - Combine information from multiple pages if relevant.
+        - Give detailed explanations.
+        - If information is unavailable, say:
+        "The indexed website does not contain information about this."
+
+        Context:
+        {context}
+
+        Question:
+        {question}
+        """
 
     response = (
         client.chat.completions.create(

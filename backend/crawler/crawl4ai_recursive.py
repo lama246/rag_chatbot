@@ -103,6 +103,15 @@ class Crawl4AICrawler:
                         include_comments=False,
                         include_tables=True
                     )
+                    print("\n" + "=" * 50)
+                    print("URL:", current_url)
+                    if content:
+                        print(content[:500])
+                        print("\nCONTENT LENGTH:", len(content))
+                    else:
+                        print("NO CONTENT EXTRACTED")
+
+                    print("=" * 50)
                     if content:
 
                         junk_phrases = [
@@ -129,10 +138,9 @@ class Crawl4AICrawler:
                             )
 
                     if (
-                            content and
-                            len(content)
-                            > 2000
-                        ):
+                        content and
+                        len(content.strip()) > 100
+                    ):
 
                         title = ""
 
@@ -171,13 +179,7 @@ class Crawl4AICrawler:
 
                     for link in links:
 
-                        # Only crawl article pages
-
-                        if (
-                            "/article" in link
-                            and
-                            link not in self.visited
-                        ):
+                        if link not in self.visited:
 
                             queue.append(link)
 
@@ -213,3 +215,19 @@ class Crawl4AICrawler:
         print(
             f"Saved {len(data)} pages"
         )
+async def crawl_site(url):
+
+                crawler = Crawl4AICrawler(
+                            start_url=url,
+                            max_pages=300
+                        )
+
+                return await crawler.crawl()
+
+
+def crawl_website(url):
+
+                return asyncio.run(
+                            crawl_site(url)
+                        )
+        
