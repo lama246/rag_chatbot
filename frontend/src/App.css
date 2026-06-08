@@ -1,0 +1,449 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,sans-serif;
+}
+
+body{
+  background:#212121;
+  color:white;
+}
+
+.app{
+  display:flex;
+  height:100vh;
+}
+
+.sidebar{
+  width:260px;
+  min-width:260px;
+  background:#171717;
+  border-right:1px solid #2d2d2d;
+  padding:16px;
+
+  display:flex;
+  flex-direction:column;
+
+  position:fixed;
+  left:0;
+  top:0;
+  height:100vh;
+}
+
+.newChatBtn{
+  width:100%;
+  background:#2b2b2b;
+  color:white;
+  border:none;
+  padding:12px;
+  border-radius:12px;
+  cursor:pointer;
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.searchBar{
+  margin-top:15px;
+  background:#222;
+  padding:10px;
+  border-radius:10px;
+  display:flex;
+  gap:10px;
+}
+
+.searchBar input{
+  flex:1;
+  background:none;
+  border:none;
+  color:white;
+  outline:none;
+}
+
+.history{
+  margin-top:20px;
+  overflow-y:auto;
+}
+
+.historyItem{
+  padding:12px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.historyItem:hover{
+  background:#2a2a2a;
+}
+
+.main{
+  margin-left:260px;
+
+  width:calc(100% - 260px);
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  overflow:hidden;
+}
+
+.welcome{
+  flex:1;
+  width:100%;
+  max-width:900px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  margin:auto;
+}
+
+.welcome h1{
+  font-size:52px;
+  font-weight:700;
+}
+
+.welcome p{
+  margin-top:10px;
+  opacity:.7;
+}
+
+.urlCard{
+  width:700px;
+  margin-top:30px;
+  background:#2a2a2a;
+  padding:20px;
+  border-radius:20px;
+}
+
+.urlCard input{
+  width:100%;
+  background:#171717;
+  border:none;
+  color:white;
+  padding:15px;
+  border-radius:12px;
+}
+
+.urlActions{
+  display:flex;
+  gap:10px;
+  margin-top:15px;
+}
+
+.urlActions button{
+  flex:1;
+  border:none;
+  padding:12px;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+.refreshBtn{
+  background:#ef4444;
+  color:white;
+}
+
+.indexedTag{
+  margin-top:15px;
+  color:#22c55e;
+}
+
+.chatArea{
+  flex:1;
+
+  width:100%;
+  max-width:900px;
+
+  margin:0 auto;
+
+  overflow-y:auto;
+  padding:30px;
+}
+
+.message{
+  margin-bottom:24px;
+}
+
+.message.user{
+  display:flex;
+  justify-content:flex-end;
+}
+
+.message.user .messageContent{
+  background:#2563eb;
+  padding:14px;
+  border-radius:16px;
+  max-width:70%;
+}
+
+.message.assistant .messageContent{
+  background:#2b2b2b;
+  padding:16px;
+  border-radius:16px;
+}
+
+.sources{
+  margin-top:10px;
+}
+
+.sources a{
+  display:block;
+  color:#60a5fa;
+  margin-top:5px;
+}
+
+.chatInput{
+  width:100%;
+  max-width:900px;
+
+  padding:20px;
+
+  display:flex;
+  gap:10px;
+
+  margin:0 auto;
+}
+
+.chatInput input{
+  flex:1;
+  background:#2a2a2a;
+  border:none;
+  color:white;
+  padding:16px;
+  border-radius:16px;
+  outline:none;
+}
+
+.chatInput button{
+  width:60px;
+  border:none;
+  border-radius:16px;
+  background:#2563eb;
+  color:white;
+  cursor:pointer;
+}
+
+.typing{
+  opacity:.7;
+}
+.modalOverlay{
+  position:fixed;
+  inset:0;
+
+  background:rgba(0,0,0,.65);
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  z-index:1000;
+}
+
+.modal{
+  width:420px;
+
+  background:#202123;
+
+  border:1px solid #333;
+
+  border-radius:18px;
+
+  padding:24px;
+
+  text-align:center;
+}
+
+.modal h2{
+  margin-bottom:10px;
+}
+
+.modal p{
+  color:#aaa;
+}
+
+.modalButtons{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+
+.modalButtons button{
+  flex:1;
+
+  padding:12px;
+
+  border:none;
+
+  border-radius:10px;
+
+  cursor:pointer;
+
+  background:#2563eb;
+
+  color:white;
+}
+.existingIndexBox{
+  margin-top:20px;
+  padding:16px;
+  background:#202123;
+  border:1px solid #333;
+  border-radius:12px;
+  text-align:center;
+}
+
+.existingIndexBox p{
+  color:#d1d5db;
+  margin-bottom:12px;
+}
+
+.existingButtons{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+}
+
+.existingButtons button{
+  padding:10px 18px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  background:#10a37f;
+  color:white;
+  font-weight:500;
+}
+
+.existingButtons .refreshBtn{
+  background:#ef4444;
+}
+.spinner {
+  width: 40px;
+  height: 40px;
+
+  border: 4px solid rgba(255,255,255,0.2);
+  border-top: 4px solid white;
+
+  border-radius: 50%;
+
+  animation: spin 1s linear infinite;
+
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* BUTTON ANIMATIONS */
+
+button {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+.newChatBtn:hover,
+.urlActions button:hover,
+.chatInput button:hover,
+.existingButtons button:hover {
+  filter: brightness(1.1);
+}
+.progressContainer {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.progressBar {
+  height: 10px;
+  background: linear-gradient(
+    90deg,
+    #10a37f,
+    #00d4ff
+  );
+  border-radius: 20px;
+  transition: width 0.3s ease;
+}
+
+.progressContainer {
+  background: #202123;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progressContainer span {
+  display: block;
+  margin-top: 8px;
+  color: #aaa;
+  font-size: 14px;
+}
+button{
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+button:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+button:active{
+  transform: scale(0.96);
+}
+
+button:disabled{
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.urlActions button,
+.existingButtons button,
+.chatInput button{
+  border-radius: 12px;
+}
+.message{
+  animation: fadeIn 0.35s ease;
+}
+
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(15px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+.ragStats{
+  margin-top:20px;
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.ragStats div{
+  background:white;
+  padding:12px 18px;
+  border-radius:12px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+.ragStats div:hover{
+  transform:translateY(-3px);
+}

@@ -13,7 +13,7 @@ crawler = Crawl4AICrawler(
 
     start_url=url,
 
-    max_pages=300
+    max_pages=30
 )
 
 asyncio.run(

@@ -21,13 +21,27 @@ def generate_answer(
 
         Answer ONLY from the retrieved website content.
 
-        Format:
+        Answer in this format:
 
-        ## Title
+        # Summary
 
-        ## Detailed Explanation
+        Short answer.
 
-        ## Important Points
+        # Key Points
+
+        • Point 1
+
+        • Point 2
+
+        • Point 3
+
+        # Website Evidence
+
+        Mention which page supplied the information.
+
+        # Confidence
+
+        State whether answer is directly found or inferred.
 
         Rules:
 

@@ -1,97 +1,49 @@
 import os
+import json
 
-from utils.cache import (
-    get_db_path
-)
-
-from utils.metadata_manager import (
-    save_metadata,
-    load_metadata
-)
-
-from crawler.crawl4ai_recursive import (
-    crawl_website
-)
-
-from rag.chunker import (
-    chunk_documents
-)
-
-from rag.vectordb import (
-    store_chunks
-)
+from utils.cache import get_db_path
+from utils.metadata_manager import save_metadata, load_metadata
+from crawler.crawl4ai_recursive import crawl_website
+from rag.chunker import chunk_documents
+from rag.vectordb import store_chunks
 
 
-def index_website(url):
+def index_website(url, refresh=False):
 
     db_path = get_db_path(url)
 
     metadata = load_metadata(url)
 
-    if os.path.exists(db_path):
+    # USE EXISTING INDEX
+    if (
+        os.path.exists(db_path)
+        and metadata
+        and not refresh
+    ):
 
-        print("\nWebsite already indexed.")
+        print("Using existing index...")
+        return db_path
 
-        print(
-            "Last indexed:",
-            metadata["last_indexed"]
-        )
+    # REFRESH INDEX
+    if refresh:
 
-        choice = input(
-            "\n1 = Use Existing Index\n"
-            "2 = Refresh Index\n\n"
-            "Choose: "
-        )
+        print("Refreshing website index...")
 
-        if choice == "1":
+        import shutil
 
-            print(
-                "\nLoading existing index..."
+        if os.path.exists(db_path):
+            shutil.rmtree(
+                db_path,
+                ignore_errors=True
             )
 
-            return db_path
-
-        print(
-            "\nRefreshing website..."
-        )
-
-    else:
-
-        print(
-            "\nIndexing website..."
-        )
+    print("Indexing website...")
 
     pages = crawl_website(url)
-    import json
-
-    with open(
-        "data/scraped_content.json",
-        "w",
-        encoding="utf-8"
-    ) as f:
-
-        json.dump(
-            pages,
-            f,
-            indent=4,
-            ensure_ascii=False
-        )
-    if len(pages) == 0:
-
-        raise Exception(
-            "No content could be extracted from website."
-        )
-    print("Pages crawled:", len(pages))
 
     chunks = chunk_documents(
         pages
     )
-    if len(chunks) == 0:
-
-        raise Exception(
-            "No chunks generated."
-        )
-    print("Chunks:", len(chunks))
 
     store_chunks(
         chunks,
@@ -103,8 +55,6 @@ def index_website(url):
         len(pages)
     )
 
-    print(
-        "\nIndex created successfully."
-    )
+    print("Index created successfully.")
 
-    return db_path
+    return db_path, len(pages)

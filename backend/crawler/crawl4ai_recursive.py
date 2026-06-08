@@ -6,12 +6,11 @@ from crawl4ai import AsyncWebCrawler
 
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
-
-
+from progress import crawl_progress
 class Crawl4AICrawler:
 
-    def __init__(self, start_url, max_pages=100):
-
+    def __init__(self, start_url, max_pages=30):
+        
         self.start_url = start_url
         self.max_pages = max_pages
 
@@ -21,6 +20,7 @@ class Crawl4AICrawler:
         self.base_domain = (
             urlparse(start_url).netloc
         )
+        self.base_path = urlparse(start_url).path
 
     async def extract_links(
         self,
@@ -45,15 +45,17 @@ class Crawl4AICrawler:
                 a["href"]
             )
 
-            parsed = urlparse(
-                full_url
-            )
+            parsed = urlparse(full_url)
 
-            if parsed.netloc == self.base_domain:
+            # must be same domain
+            if parsed.netloc != self.base_domain:
+                continue
 
-                links.add(
-                    full_url
-                )
+            # must stay in same section (IMPORTANT FIX)
+            if not parsed.path.startswith(self.base_path):
+                continue
+
+            links.add(full_url)
 
         return links
 
@@ -62,7 +64,10 @@ class Crawl4AICrawler:
         queue = [self.start_url]
 
         async with AsyncWebCrawler() as crawler:
-
+            
+            
+            crawl_progress["current"] = 0
+            crawl_progress["total"] = self.max_pages
             while (
                 queue and
                 len(self.visited)
@@ -72,7 +77,9 @@ class Crawl4AICrawler:
                 current_url = (
                     queue.pop(0)
                 )
-
+                crawl_progress["current"] += 1
+            
+                
                 if (
                     current_url
                     in self.visited
@@ -83,11 +90,14 @@ class Crawl4AICrawler:
                     "Scraping:",
                     current_url
                 )
+                
 
                 self.visited.add(
                     current_url
                 )
-
+                crawl_progress["current"] = len(
+                        self.visited
+                )
                 try:
 
                     result = await (
@@ -189,7 +199,11 @@ class Crawl4AICrawler:
                         "ERROR:",
                         e
                     )
-
+            # Crawl finished
+            crawl_progress["current"] = len(self.visited)
+            crawl_progress["total"] = max(
+                len(self.visited),
+                1)
         return self.scraped_data
 
     async def save_json(
@@ -219,7 +233,7 @@ async def crawl_site(url):
 
                 crawler = Crawl4AICrawler(
                             start_url=url,
-                            max_pages=300
+                            max_pages=30
                         )
 
                 return await crawler.crawl()

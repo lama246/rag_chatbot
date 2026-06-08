@@ -1,16 +1,22 @@
+import hashlib
 from urllib.parse import urlparse
-import os
+
 
 def get_domain(url):
 
+    parsed = urlparse(url)
+
     domain = (
-        urlparse(url)
-        .netloc
+        parsed.netloc
         .replace("www.", "")
         .replace(".", "_")
     )
 
-    return domain
+    url_hash = hashlib.md5(
+        url.encode()
+    ).hexdigest()[:8]
+
+    return f"{domain}_{url_hash}"
 
 
 def get_db_path(url):
