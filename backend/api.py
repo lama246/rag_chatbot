@@ -58,8 +58,7 @@ def index_site(req: IndexRequest):
 @app.post("/ask")
 def ask_question(req: AskRequest):
 
-    db_path = index_website(req.url)
-
+    db_path, _ = index_website(req.url)
     results = retrieve_context(req.question, db_path)
 
     docs = results["documents"][0]

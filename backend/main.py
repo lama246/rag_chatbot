@@ -24,3 +24,4 @@ with open(
     )
 
 print("Saved Successfully")
+print("WRITING JSON")

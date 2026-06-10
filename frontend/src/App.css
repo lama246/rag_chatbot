@@ -432,6 +432,7 @@ button:disabled{
   }
 }
 .ragStats{
+  color:black;
   margin-top:20px;
   display:flex;
   gap:15px;
@@ -439,6 +440,7 @@ button:disabled{
 }
 
 .ragStats div{
+  color:black;
   background:white;
   padding:12px 18px;
   border-radius:12px;

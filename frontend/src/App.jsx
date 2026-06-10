@@ -121,6 +121,7 @@ export default function App() {
     if (!question) return;
 
     const userQuestion = question;
+    const targetMessageIndex = messages.length;
 
     setMessages((prev) => [
       ...prev,
@@ -152,6 +153,7 @@ export default function App() {
         question: userQuestion,
         answer: res.data.answer,
         timestamp: new Date().toLocaleString(),
+        targetIndex: targetMessageIndex
       },
       ...prev,
     ]);
@@ -177,17 +179,17 @@ export default function App() {
           {history.map((item, i) => (
             <div 
               key={i} 
-              className="historyItem">
+              className="historyItem"
               onClick={() =>
-                  messageRefs.current[i]?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "center"
-                  })
+                messageRefs.current[item.targetIndex]?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start"
+                })
               }
             
-              
+            >
             
-              {item.question}
+                    {item.question}
             </div>
           ))}
         </div>

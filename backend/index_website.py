@@ -6,6 +6,7 @@ from utils.metadata_manager import save_metadata, load_metadata
 from crawler.crawl4ai_recursive import crawl_website
 from rag.chunker import chunk_documents
 from rag.vectordb import store_chunks
+import json
 
 
 def index_website(url, refresh=False):
@@ -22,7 +23,7 @@ def index_website(url, refresh=False):
     ):
 
         print("Using existing index...")
-        return db_path
+        return db_path,metadata.get("pages", 0)
 
     # REFRESH INDEX
     if refresh:
@@ -41,6 +42,17 @@ def index_website(url, refresh=False):
 
     pages = crawl_website(url)
 
+    with open(
+        "data/scraped_content.json",
+        "w",
+        encoding="utf-8"
+    ) as f:
+        json.dump(
+            pages,
+            f,
+            indent=4,
+            ensure_ascii=False
+        )
     chunks = chunk_documents(
         pages
     )
