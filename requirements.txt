@@ -9,3 +9,8 @@ groq
 beautifulsoup4
 requests
 torch
+fastapi
+uvicorn
+chromadb
+crawl4ai
+sentence-transformers
