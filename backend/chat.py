@@ -2,87 +2,89 @@ from rag.retriever import retrieve_context
 from rag.generator import generate_answer
 from index_website import index_website
 
-url = input(
-    "Enter Website URL: "
-)
+if __name__ == "__main__":
 
-db_path = index_website(
-    url
-)
-
-
-while True:
-
-    question = input(
-        "\nAsk: "
+    url = input(
+        "Enter Website URL: "
     )
 
-    results = retrieve_context(
-        question,
-        db_path
-    )
-    print("\n===== RETRIEVED DOCS =====\n")
-
-    for i, doc in enumerate(results["documents"][0]):
-
-        print(f"\nDOC {i+1}")
-        print(doc[:1000])
-
-    print("\n=========================\n")
-
-    docs = (
-        results["documents"][0]
+    db_path = index_website(
+        url
     )
 
-    metas = (
-        results["metadatas"][0]
-    )
 
-    context = ""
+    while True:
 
-    for doc, meta in zip(
-        docs,
-        metas
-    ):
+        question = input(
+            "\nAsk: "
+        )
 
-        context += f"""
+        results = retrieve_context(
+            question,
+            db_path
+        )
+        print("\n===== RETRIEVED DOCS =====\n")
 
-Title:
-{meta['title']}
+        for i, doc in enumerate(results["documents"][0]):
 
-Content:
-{doc}
+            print(f"\nDOC {i+1}")
+            print(doc[:1000])
 
-"""
+        print("\n=========================\n")
 
-    answer = generate_answer(
-        question,
-        context
-    )
+        docs = (
+            results["documents"][0]
+        )
 
-    print("\n")
-    print("=" * 60)
+        metas = (
+            results["metadatas"][0]
+        )
 
-    print(answer)
+        context = ""
 
-    print("\nSources:\n")
+        for doc, meta in zip(
+            docs,
+            metas
+        ):
 
-    shown = set()
+            context += f"""
 
-    for meta in metas:
+    Title:
+    {meta['title']}
 
-        if meta["url"] not in shown:
+    Content:
+    {doc}
 
-            shown.add(
-                meta["url"]
-            )
+    """
 
-            print(
-                meta["title"]
-            )
+        answer = generate_answer(
+            question,
+            context
+        )
 
-            print(
-                meta["url"]
-            )
+        print("\n")
+        print("=" * 60)
 
-            print()
+        print(answer)
+
+        print("\nSources:\n")
+
+        shown = set()
+
+        for meta in metas:
+
+            if meta["url"] not in shown:
+
+                shown.add(
+                    meta["url"]
+                )
+
+                print(
+                    meta["title"]
+                )
+
+                print(
+                    meta["url"]
+                )
+
+                print()

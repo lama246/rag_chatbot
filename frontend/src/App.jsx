@@ -26,7 +26,7 @@ export default function App() {
   
   const [loading, setLoading] = useState(false);
 
-  const API = "http://127.0.0.1:8000";
+  const API = "https://amal1357-rag.hf.space";
 
   const checkAndIndex = async () => {
 
