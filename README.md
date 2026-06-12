@@ -11,13 +11,13 @@ This project demonstrates a full **end-to-end RAG pipeline**:
 - LLM-based answer generation (Groq)
 
 ---
-#how to run
-cd frontend
-inside cd frontend
+#how to run,
+cd frontend,
+inside cd frontend,
 frontend-npm run dev
 
-cd backend
-inside cd backend
+cd backend,
+inside cd backend,
 backend-uvicorn api:app --reload
 
 ## 🚀 Features
