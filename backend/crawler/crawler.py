@@ -6,7 +6,7 @@ from collections import deque
 
 class WebsiteCrawler:
 
-    def __init__(self, start_url, max_pages=200):
+    def __init__(self, start_url, max_pages=30):
         self.start_url = start_url
         self.max_pages = max_pages
 

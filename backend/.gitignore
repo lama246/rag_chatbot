@@ -4,9 +4,8 @@ venv/
 .env
 .vscode/
 *.log
-data/
-indexes/
-chroma_db/
+
+
 *.sqlite3
 *.bin
 __pycache__/

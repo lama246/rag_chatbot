@@ -6,7 +6,7 @@ if __name__ == "__main__":
 
     crawler = WebsiteCrawler(
         start_url=url,
-        max_pages=15
+        max_pages=30
     )
 
     data = crawler.crawl()
