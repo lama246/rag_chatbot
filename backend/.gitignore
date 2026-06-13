@@ -1,12 +1,8 @@
+.env
 __pycache__/
 *.pyc
 venv/
-.env
 .vscode/
 *.log
-
-
-*.sqlite3
-*.bin
-__pycache__/
-venv/
+.env1
+.env*
