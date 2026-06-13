@@ -31,7 +31,15 @@ pip install -r requirements.txt
 
 create an api key in groq(because git does not allow my groq api key)
 
-export GROQ_API_KEY="use your api key here"
+in git bast, export GROQ_API_KEY="use your api key here"
+
+or
+
+in cmd, set GROQ_API_KEY="use your api key here"
+
+or
+
+in vscode powershell, $env:GROQ_API_KEY="use your api key here"
 
 uvicorn api:app --reload
 
