@@ -16,14 +16,23 @@ This project demonstrates a full **end-to-end RAG pipeline**:
 open netlify frontend using the link-> https://6a297ede54540825c5a50a83--ragchatnew.netlify.app/
 
 open git bash(right click and paste to paste code in git bash) or vscode terminal or command prompt,
+
 git clone https://github.com/lama246/rag_chatbot
+
 cd rag_chatbot
+
 python -m venv venv
+
 source venv/Scripts/activate(in git bash) or .\venv\Scripts\Activate.ps1(in vscode powershell) or venv\Scripts\activate(in command prompt)
+
 cd backend
+
 pip install -r requirements.txt
+
 export GROQ_API_KEY="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"
+
 uvicorn api:app --reload
+
 now the backend has loaded, not search for any website and ask question
 
 
