@@ -29,7 +29,9 @@ cd backend
 
 pip install -r requirements.txt
 
-export GROQ_API_KEY="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"
+create an api key in groq(because git does not allow my groq api key)
+
+export GROQ_API_KEY="use your api key here"
 
 uvicorn api:app --reload
 
