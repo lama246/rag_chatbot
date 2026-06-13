@@ -5,8 +5,5 @@ venv/
 .vscode/
 *.log
 .env1
-<<<<<<< HEAD
 .env*
-=======
-.env*
->>>>>>> da2d916 (.env added to git)
+
