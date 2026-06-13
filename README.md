@@ -11,54 +11,36 @@ This project demonstrates a full **end-to-end RAG pipeline**:
 - LLM-based answer generation (Groq)
 
 ---
-#how to run,
-cd frontend,
-inside cd frontend,
-npm run dev
-
-cd backend,
-inside cd backend,
+#how to run locally, 
+open netlify frontend using the link-> https://6a297ede54540825c5a50a83--ragchatnew.netlify.app/
+open git bash(right click and paste to paste code in git bash) or vscode terminal or command prompt,
+git clone https://github.com/lama246/rag_chatbot
+cd rag_chatbot
+python -m venv venv
+source venv/Scripts/activate(in git bash) or .\venv\Scripts\Activate.ps1(in vscode powershell) or venv\Scripts\activate(in command prompt)
+cd backend
+pip install -r requirements.txt
+export GROQ_API_KEY="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"
 uvicorn api:app --reload
+now the backend has loaded, not search for any website and ask question
+
+
+
+
 
 ## 🚀 Features
 
 - 🔗 Accepts any website URL as input
-- 🕷️ Recursive web crawling (internal links only)
+- 🕷️ Recursive web crawling
 - 🧹 Clean content extraction using **Crawl4AI + Trafilatura**
 - 🧠 Semantic search using embeddings (SentenceTransformers)
 - 📦 Vector storage using **ChromaDB**
 - 🎯 Cross-Encoder reranking for high-accuracy retrieval
 - 💬 AI chatbot answering using **Groq LLM**
 - 📚 Source-aware responses (shows article URLs)
+- important feature-if already searched url, then we can choose whether to use existing url or refresh url
 
 ---
-1. Create Virtual Environment
-python -m venv venv
-venv\Scripts\activate   # Windows
-
-2. Install Dependencies
-pip install -r requirements.txt
-
-Required Packages:
-pip install crawl4ai
-pip install trafilatura
-pip install langchain-text-splitters
-pip install sentence-transformers
-pip install chromadb
-pip install groq
-pip install python-dotenv
-
- How to Run
-Step 1: Crawl Website
-python backend/crawl_website.py
-Enter:
-https://www.thehindu.com
-
-Step 2: Build Vector Database
-python backend/test_vector.py
-
-Step 3: Start Chatbot
-python backend/chat.py
 
 Key Improvements (Over Basic RAG)
 ✔ Crawl4AI Recursive Crawling
