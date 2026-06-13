@@ -5,3 +5,4 @@ venv/
 .vscode/
 *.log
 .env1
+.env*
