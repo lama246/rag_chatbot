@@ -12,7 +12,9 @@ This project demonstrates a full **end-to-end RAG pipeline**:
 
 ---
 #how to run locally, 
+
 open netlify frontend using the link-> https://6a297ede54540825c5a50a83--ragchatnew.netlify.app/
+
 open git bash(right click and paste to paste code in git bash) or vscode terminal or command prompt,
 git clone https://github.com/lama246/rag_chatbot
 cd rag_chatbot
